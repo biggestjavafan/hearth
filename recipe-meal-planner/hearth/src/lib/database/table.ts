@@ -1,5 +1,4 @@
 export interface Table {
-    id: string,
-    entry: number,
-    createdAt: Date,
+    id: number,
+    type: string,
   }

@@ -1,13 +1,19 @@
 import { supabase } from '$lib/supabase';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error } = await supabase
-    .from('recipes')
-    .select('*');
+interface TableRow {
+    id: number;
+    type: string;
+}
 
-  return {
-    recipes: data ?? [],
-    error: error?.message ?? null
-  };
-};
+export const load: PageLoad = async () => {
+    const {data, error} = await supabase
+        .from('tables')
+        .select('*')
+        .order('id', { ascending: true });
+
+        return {
+            tables: data ?? [],
+            error: error ? error.message : null 
+        }
+}
